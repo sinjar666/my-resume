@@ -1,0 +1,124 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ydnt/global//global/global}
+    \entry{Mukherjee:Srijan:2022}{article}{}
+      \name{author}{4}{}{%
+        {{hash=78a5e64d433af908c6c9368c7d57aee0}{%
+           family={Mukherjee},
+           familyi={M\bibinitperiod},
+           given={Srijan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fb06763b432e2c40298bc9f05ab534aa}{%
+           family={RC},
+           familyi={R\bibinitperiod},
+           given={Dhanuesh},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2debda592bedde9a6358ed7edc20baf2}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Nishant},
+           giveni={N\bibinitperiod}}}%
+        {{hash=571f69af3c7f064a6113f6a568d63e35}{%
+           family={P},
+           familyi={P\bibinitperiod},
+           given={Arunkumar},
+           giveni={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{95f7309d4971c503c0fb206e7b6041cd}
+      \strng{fullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{bibnamehash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authorbibnamehash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authornamehash}{95f7309d4971c503c0fb206e7b6041cd}
+      \strng{authorfullhash}{9f162bbe606444fb12fccde68698819f}
+      \field{extraname}{1}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Technology Disclosure Commons}
+      \field{title}{SYSTEM AND METHOD OF LOCKING AND RANKING THE RESOURCE FOR UTILIZATION IN A DISTRIBUTED SCHEDULING SYSTEM}
+      \field{volume}{5048}
+      \field{year}{2022}
+      \true{nocite}
+    \endentry
+    \entry{Mukherjee}{patent}{}
+      \name{author}{4}{}{%
+        {{hash=78a5e64d433af908c6c9368c7d57aee0}{%
+           family={Mukherjee},
+           familyi={M\bibinitperiod},
+           given={Srijan},
+           giveni={S\bibinitperiod}}}%
+        {{hash=fb06763b432e2c40298bc9f05ab534aa}{%
+           family={RC},
+           familyi={R\bibinitperiod},
+           given={Dhanuesh},
+           giveni={D\bibinitperiod}}}%
+        {{hash=2debda592bedde9a6358ed7edc20baf2}{%
+           family={Kumar},
+           familyi={K\bibinitperiod},
+           given={Nishant},
+           giveni={N\bibinitperiod}}}%
+        {{hash=571f69af3c7f064a6113f6a568d63e35}{%
+           family={P},
+           familyi={P\bibinitperiod},
+           given={Arunkumar},
+           giveni={A\bibinitperiod}}}%
+      }
+      \name{holder}{1}{}{%
+        {{hash=fe42b1e177bce632e00d4ce3fd6bdb09}{%
+           family={Inc},
+           familyi={I\bibinitperiod},
+           given={VISA},
+           giveni={V\bibinitperiod}}}%
+      }
+      \strng{namehash}{95f7309d4971c503c0fb206e7b6041cd}
+      \strng{fullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{bibnamehash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authorbibnamehash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authornamehash}{95f7309d4971c503c0fb206e7b6041cd}
+      \strng{authorfullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{holderbibnamehash}{fe42b1e177bce632e00d4ce3fd6bdb09}
+      \strng{holdernamehash}{fe42b1e177bce632e00d4ce3fd6bdb09}
+      \strng{holderfullhash}{fe42b1e177bce632e00d4ce3fd6bdb09}
+      \field{extraname}{2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{day}{6}
+      \field{month}{4}
+      \field{number}{5048}
+      \field{title}{SYSTEM AND METHOD OF LOCKING AND RANKING THE RESOURCE FOR UTILIZATION IN A DISTRIBUTED SCHEDULING SYSTEM}
+      \field{type}{other}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://www.tdcommons.org/dpubs_series/5048
+      \endverb
+      \verb{url}
+      \verb https://www.tdcommons.org/dpubs_series/5048
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
