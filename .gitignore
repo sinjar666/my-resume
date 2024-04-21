@@ -1,4 +1,4 @@
-*.pdf
+latex/*.pdf
 *.aux
 *.log
 *.xmpi
