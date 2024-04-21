@@ -25,7 +25,10 @@
 
 % The paracol package lets you typeset columns of text in parallel
 \usepackage{paracol}
-
+\usepackage{hyphenat}
+\usepackage[english]{babel}
+\useshorthands{"}
+\defineshorthand{"=}{\hyp{}}
 
 % Change the font if you want to, depending on whether
 % you're using pdflatex or xelatex/lualatex
@@ -90,8 +93,6 @@
   \github{sinjar666}
   \linkedin{sinjar666}
 
-%   \orcid{0000-0000-0000-0000} % Obviously making this up too.
-
   %% You can add your own arbitrary detail with
   %% \printinfo{symbol}{detail}[optional hyperlink prefix]
   % \printinfo{\faPaw}{Hey ho!}
@@ -114,6 +115,8 @@
 
 \makecvheader
 
+12 years of official experience with Software Development, a decade more otherwise!
+
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
@@ -128,7 +131,7 @@
 
 \cvevent{Director, Software Development}{VISA Cloud Platform IaaS}{September 2023 -- Present}{Bengaluru, IN}
 \begin{itemize}
-  \item Handle entire Bangalore IaaS Team size \(\sim \)20, (2 Managers + 18 engineers), \(\sim\)\$2.2M Cost, Portfolio of 18 microservices and frontends, 5 SDKs.
+  \item Led entire Bangalore IaaS Team of size \(\sim \)20, (2 Managers + 18 engineers), \(\sim\)\$2.2M Cost, Portfolio of 18 microservices and frontends, 5 SDKs.
   \item Envisioned and Executed VISA's Private Cloud IaaS Orchestration Roadmap and Strategy to realise cost savings upwards of \$200 Million in FY-23.
   \item Started an Architecture and Design Review Committee for converting new ideas into implementiable solutions. Key contributor for the platform pillar's architectural decisions along with other team leads.
   \item Positioned VISA's Enterprise Cloud to grow as a SaaS offering in a 5 year strategic plan.
@@ -192,6 +195,100 @@ Worked at developing a desktop application CLASSICO (CLASSroom Sharing by Intera
 Technology Stack: Python on Ubuntu / Any debian based Linux distro
 Frameworks: Gstreamer (Python bindings), GTK+
 
+%% Switch to the right column. This will now automatically move to the second
+%% page if the content is too long.
+\switchcolumn
+
+\cvsection{Publications}
+
+%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
+%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly; or write \bibnamedelimi if you use initials in the .bib
+%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
+\mynames{Lim/Lian\bibnamedelima Tze,
+  Wong/Lian\bibnamedelima Tze,
+  Lim/Tracy,
+  Lim/L.\bibnamedelimi T.}
+%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
+
+\nocite{*}
+
+\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Patents and Defensive Publications}}, type=patent]
+
+
+\cvsection{Skills}
+
+\cvtag{Private Cloud}
+\cvtag{PaaS}
+\cvtag{IaaS}
+\cvtag{SaaS}
+\cvtag{Negotiation}
+\cvtag{Engineering leadership}
+\cvtag{People Management}\\
+\cvtag{Project Management}\\
+\cvtag{Vendor Management}
+\cvtag{Agile}
+
+\divider\smallskip
+
+\cvtag{Software Design and Architecture}\\
+\cvtag{NodeJS}
+\cvtag{Javascript}
+\cvtag{Java}
+\cvtag{Spring}
+\cvtag{Angular}
+\cvtag{Linux}
+\cvtag{Kafka}\\
+\cvtag{Multithreading}
+\cvtag{HTML/CSS}\\
+\cvtag{Distributed Computing}
+\cvtag{C++}
+\cvtag{C\# .NET}\\
+\cvtag{HTTP/REST}
+\cvtag{Virtualization}
+
+\divider\smallskip
+
+\cvtag{Git}
+\cvtag{JIRA}
+\cvtag{Office}
+\cvtag{K8s}
+
+\divider
+
+\cvsection{Most Proud of}
+
+\cvachievement{\faChartLine}{Product Maturity}{from 100s of automation runs in a year to over 10M in FY-23}
+
+\divider
+
+\cvachievement{\faCheck}{Manager effectiveness}{100\% manager effectiveness score in FY-23 anonymous employee survey}
+
+\divider
+
+\cvachievement{\faTrophy}{Portfolio}{Grew India team's portfolio by 2x in 2 years despite the same number of engineers}
+
+\divider
+
+\cvachievement{\faQuestion}{Growth Mindset}{A positive attitude towards change and continuous learning has helped me adapt to every new role and domain. Have changed tech stacks, roles, and domains across my experience.}
+
+\divider
+
+\cvsection{Languages}
+
+\cvskill{English}{5}
+\cvskill{Hindi}{4}
+\cvskill{Telugu}{3.5} %% supports X.5 values.
+\cvskill{Bengali}{3} %% supports X.5 values.
+\cvskill{Kannada}{3} %% supports X.5 values.
+
+\cvsection{Education}
+
+\cvevent{B. Tech\ in Computer Science}{SRM University}{April 2009 -- March 2013}{}
+
+\end{paracol}
+
+\end{document}
+
 
 
 % \cvsection{A Day of My Life}
@@ -214,89 +311,4 @@ Frameworks: Gstreamer (Python bindings), GTK+
 % % use ONLY \newpage if you want to force a page break for
 % % ONLY the currentc column
 % \newpage
-%% Switch to the right column. This will now automatically move to the second
-%% page if the content is too long.
-\switchcolumn
 
-\cvsection{Life Philosophy}
-\begin{quote}
-``If you don't have any shadows, you're not standing in the light.''
-\end{quote}
-
-\cvsection{Publications}
-
-%% Specify your last name(s) and first name(s) as given in the .bib to automatically bold your own name in the publications list.
-%% One caveat: You need to write \bibnamedelima where there's a space in your name for this to work properly; or write \bibnamedelimi if you use initials in the .bib
-%% You can specify multiple names, especially if you have changed your name or if you need to highlight multiple authors.
-\mynames{Lim/Lian\bibnamedelima Tze,
-  Wong/Lian\bibnamedelima Tze,
-  Lim/Tracy,
-  Lim/L.\bibnamedelimi T.}
-%% MAKE SURE THERE IS NO SPACE AFTER THE FINAL NAME IN YOUR \mynames LIST
-
-\nocite{*}
-
-\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Patents and Defensive Publications}}, type=patent]
-
-\cvsection{Most Proud of}
-
-\cvachievement{\faTrophy}{Courage I had}{to take a sinking ship and try to make it float}
-
-\divider
-
-\cvachievement{\faHeartbeat}{Persistence \& Loyalty}{I showed despite the hard moments and my willingness to stay with Yahoo after the acquisition}
-
-\divider
-
-\cvachievement{\faChartLine}{Google's Growth}{from a hundred thousand searches per day to over a billion}
-
-\divider
-
-\cvachievement{\faFemale}{Inspiring women in tech}{Youngest CEO on Fortune's list of 50 most powerful women}
-
-\cvsection{Strengths}
-
-\cvtag{Hard-working (18/24)}
-\cvtag{Persuasive}\\
-\cvtag{Motivator \& Leader}
-
-\divider\smallskip
-
-\cvtag{UX}
-\cvtag{Mobile Devices \& Applications}
-\cvtag{Product Management \& Marketing}
-
-\cvsection{Languages}
-
-\cvskill{English}{5}
-% \divider
-
-\cvskill{Spanish}{4}
-% \divider
-
-\cvskill{German}{3.5} %% supports X.5 values.
-
-
-\cvsection{Education}
-
-\cvevent{M.S.\ in Computer Science}{Stanford University}{Sept 1997 -- June 1999}{}
-
-\divider
-
-\cvevent{B.S.\ in Symbolic Systems}{Stanford University}{Sept 1993 -- June 1997}{}
-
-
-\cvsection{Referees}
-
-% \cvref{name}{email}{mailing address}
-\cvref{Prof.\ Alpha Beta}{Institute}{a.beta@university.edu}
-{Address Line 1\\Address line 2}
-
-\divider
-
-\cvref{Prof.\ Gamma Delta}{Institute}{g.delta@university.edu}
-{Address Line 1\\Address line 2}
-
-\end{paracol}
-
-\end{document}
