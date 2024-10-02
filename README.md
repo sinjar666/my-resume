@@ -84,3 +84,4 @@ texlive-ragged2e texlive-enumitem texlive-tcolorbox texlive-academicons
 ## Conclusion
 
 You should now be able to set up LaTeX with the `altacv` class and compile your resume. For further customization and options, refer to the [altacv documentation](https://altacv.richardlitt.github.io/).
+    
