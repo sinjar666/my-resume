@@ -1,3 +1,19 @@
 \newboolean{TWO_COLUMN_LAYOUT}
+\newboolean{ENABLE_GRAPHICS}
 
 \setboolean{TWO_COLUMN_LAYOUT}{true}
+\setboolean{ENABLE_GRAPHICS}{true}
+
+\newif\ifshowIcons
+\showIconstrue    % or \showIconsfalse to hide icons
+%\showIconsfalse
+
+% Converts string like "ChartLine" to \faChartLine
+\newcommand{\faicon}[1]{\csname fa#1\endcsname}
+
+% Conditionally include the icon based on flag
+\newcommand{\maybeicon}[1]{%
+  \ifshowIcons
+    \faicon{#1}%
+  \fi
+}

@@ -22,7 +22,7 @@
 \ProvidesClass{altacv}[2022/11/03 AltaCV v1.6.5, yet another alternative class for a resume/curriculum vitae.]
 
 %% v1.1: Optionally load academicons
-%% v1.4: Nope, academicons is unnecessary; fontawesome5 has \faOrcid.
+%% v1.4: Nope, academicons is unnecessary; fontawesome5 has \maybeicon{Orcid}.
 \DeclareOption{academicons}{\ClassWarning{altacv}{academicons option is now obsolete and unnecessary.}}
 %% v1.1.3: Choice of round/square photo
 \newif\if@normalphoto
@@ -97,7 +97,7 @@
 \colorlet{name}{heading}
 \colorlet{tagline}{accent}
 \newcommand{\itemmarker}{{\small\textbullet}}
-\newcommand{\ratingmarker}{\faCircle}
+\newcommand{\ratingmarker}{\maybeicon{Circle}}
 
 \RequirePackage{tikz}
 \usetikzlibrary{arrows}
@@ -191,16 +191,16 @@
 \newcommand{\name}[1]{\def\@name{#1}}
 \newcommand{\tagline}[1]{\def\@tagline{#1}}
 \newcommand{\personalinfo}[1]{\def\@personalinfo{#1}}
-\NewInfoField{email}{\faAt}[mailto:]
-\NewInfoField{mailaddress}{\faEnvelope}
-\NewInfoField{phone}{\faPhone}[tel:]
-\NewInfoField{homepage}{\faGlobe}[https://]
-\NewInfoField{twitter}{\faTwitter}[https://twitter.com/]
-\NewInfoField{linkedin}{\faLinkedin}[https://linkedin.com/in/]
-\NewInfoField{github}{\faGithub}[https://github.com/]
+\NewInfoField{email}{\maybeicon{At}}[mailto:]
+\NewInfoField{mailaddress}{\maybeicon{Envelope}}
+\NewInfoField{phone}{\maybeicon{Phone}}[tel:]
+\NewInfoField{homepage}{\maybeicon{Globe}}[https://]
+\NewInfoField{twitter}{\maybeicon{Twitter}}[https://twitter.com/]
+\NewInfoField{linkedin}{\maybeicon{Linkedin}}[https://linkedin.com/in/]
+\NewInfoField{github}{\maybeicon{Github}}[https://github.com/]
 % v1.?? Use fontawesome5 for Orcid symbol
-\NewInfoField{orcid}{\faOrcid}[https://orcid.org/]
-\NewInfoField{location}{\faMapMarker}
+\NewInfoField{orcid}{\maybeicon{Orcid}}[https://orcid.org/]
+\NewInfoField{location}{\maybeicon{MapMarker}}
 
 % v1.2: Support for multiple photos
 \newlength{\altacv@photos@width}
@@ -285,8 +285,8 @@
   \ifstrequal{#2}{}{}{
   \textbf{\color{accent}#2}\par
   \smallskip}
-  \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\faCalendar~#3}}}%
-  \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\faMapMarker~#4}}}\par
+  \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{Calendar}~#3}}}%
+  \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{MapMarker}~#4}}}\par
   \medskip\normalsize
 }
 

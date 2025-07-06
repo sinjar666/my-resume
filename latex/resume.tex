@@ -17,21 +17,23 @@
 
 \documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
 
+\usepackage{xifthen}
+\include{config}
+\include{./include/constants}
+
+
+
 %% AltaCV uses the fontawesome5 package.
 %% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
 
 % Change the page layout if you need to
 \geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
 
-% The paracol package lets you typeset columns of text in parallel
-\usepackage{xifthen}
-\include{./config.tex}
-
-\include{./include/constants.tex}
-
 \ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
-\usepackage{paracol}
+  % The paracol package lets you typeset columns of text in parallel
+  \usepackage{paracol}
 }{}
+
 \usepackage{hyphenat}
 \usepackage[english]{babel}
 
@@ -67,7 +69,13 @@
 % Change the bullets for itemize and rating marker
 % for \cvskill if you want to
 \renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
+\renewcommand{\ratingmarker}{\maybeicon{Circle}}
+
+% Final rendering command: icon (if enabled), title, description
+\newcommand{\achievementEntry}[3]{%
+  \cvachievement{\maybeicon{#1}}{\textbf{#2}}{#3}%
+  \divider
+}
 
 %% Use (and optionally edit if necessary) this .tex if you
 %% want to use an author-year reference style like APA(6)
@@ -100,103 +108,93 @@
 
   %% You can add your own arbitrary detail with
   %% \printinfo{symbol}{detail}[optional hyperlink prefix]
-  % \printinfo{\faPaw}{Hey ho!}
+  % \printinfo{\maybeicon{Paw}}{Hey ho!}
   %% Or you can declare your own field with
   %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
-  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \NewInfoField{gitlab}{\maybeicon{Gitlab}}[https://gitlab.com/]
   % \gitlab{your_id}
 	%%
   %% For services and platforms like Mastodon where there isn't a
   %% straightforward relation between the user ID/nickname and the hyperlink,
   %% you can use \printinfo directly e.g.
-  % \printinfo{\faMastodon}{@username@instace}[https://instance.url/@username]
+  % \printinfo{\maybeicon{Mastodon}}{@username@instace}[https://instance.url/@username]
   %% But if you absolutely want to create new dedicated info fields for
   %% such platforms, then use \NewInfoField* with a star:
-  % \NewInfoField*{mastodon}{\faMastodon}
+  % \NewInfoField*{mastodon}{\maybeicon{Mastodon}}
   %% then you can use \mastodon, with TWO arguments where the 2nd argument is
   %% the full hyperlink.
   % \mastodon{@username@instance}{https://instance.url/@username}
 }
 
 \makecvheader
-
-Dynamic and results-oriented engineering leader with over \textbf{12 years} of experience in software development and team management. Proven track record in driving product innovation, optimizing engineering processes, and enhancing team performance. 
-Seeking a Senior Engineering Leadership role to leverage expertise in distributed computing, agile methodologies, and cross-functional collaboration to deliver impactful solutions and foster a culture of excellence within the team
+\input{./include/headline.tex}
 
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
-%% Set the left/right column width ratio to 6:4.
-\columnratio{0.6}
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
+  %% Set the left/right column width ratio to 6:4.
+  \columnratio{0.6}
 
-% Start a 2-column paracol. Both the left and right columns will automatically
-% break across pages if things get too long.
-\begin{paracol}{2}
+  % Start a 2-column paracol. Both the left and right columns will automatically
+  % break across pages if things get too long.
+  \begin{paracol}{2}
+
+  % Manually apply the body color to both columns
+  \color{body}  % Apply the color at the beginning of left column
+}{}
 
 \cvsection{Experience}
 
 \cvevent{Director, Software Development}{VISA Cloud Platform IaaS}{September 2023 -- Present}{Bengaluru, IN}
 \input{./include/exp-director-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Senior Engineering Manager}{VISA Cloud Platform IaaS}{August 2021 -- August 2023}{Bengaluru, IN}
 \input{./include/exp-sr-manager-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Staff Full Stack Developer}{VISA Cloud Platform}{Jan 2019 -- July 2021}{Bengaluru, IN}
-\input{./include/exp-sr-manager-visa.tex}
+\input{./include/exp-staff-eng-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Senior Full Stack Developer}{VISA Inc}{Feb 2017 -- Jan 2019}{Bengaluru, IN}
 \input{./include/exp-sr-eng-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{From Project Trainee to Senior Engineer}{Honeywell Technology Solutions}{Dec 2012 -- Jan 2017}{Bengaluru, IN}
-\input{./include/exp-sr-eng-visa.tex}
+\input{./include/exp-honeywell.tex}
 
-
-\divider
+\divider  
 
 \cvevent{Summer Intern}{SRM Research Institute}{May 2012 -- June 2012}{Bengaluru, IN}
 \input{./include/exp-intern-srm.tex}
 
-%% Switch to the right column. This will now automatically move to the second
-%% page if the content is too long.
-\switchcolumn
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
+  %% Switch to the right column. This will now automatically move to the second
+  %% page if the content is too long.
+  \switchcolumn
+  \color{body}  % Apply the color at the beginning of left column
+}{}
 
 \cvsection{Publications}
 
 \nocite{*}
 
-\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Patents and Defensive Publications}}, type=patent]
+\printbibliography[heading=pubtype,title={\printinfo{\maybeicon{File}*[regular]}{Patents and Defensive Publications}}, type=patent]
 
 
 \cvsection{Skills}
 \input{./include/skills.tex}
 
-\divider
-
+% Render Section
 \cvsection{Most Proud Of}
-
-\cvachievement{\faChartLine}{\textbf{Revolutionized Product Maturity}}{Elevated automation runs from hundreds annually to an astounding \textbf{over 10 million} in FY-23-24, showcasing a transformative leap in efficiency.}
-
-\divider
-
-\cvachievement{\faCheck}{\textbf{Unmatched Manager Effectiveness}}{Achieved a \textbf{100\% manager effectiveness score} in the FY-23-24 anonymous employee survey, reflecting exceptional leadership and team cohesion.}
-
-\divider
-
-\cvachievement{\faTrophy}{\textbf{Portfolio Expansion}}{Doubled the India team's portfolio by \textbf{2x in just 2 years} while maintaining the same number of engineers, demonstrating strategic resource management and innovation.}
-
-\divider
-
-\cvachievement{\faLightbulb}{\textbf{Embracing a Growth Mindset}}{Cultivated a proactive approach to change and continuous learning, enabling seamless transitions across diverse roles, technologies, and domains throughout my career.}
-
-\divider
+\input{./include/achievements}
+\loadAchievements
 
 \cvsection{Education}
 
@@ -210,30 +208,9 @@ Seeking a Senior Engineering Leadership role to leverage expertise in distribute
 
 \cvevent{High School}{Loyola High School}{Class of 2009}{Jamshedpur IN}
 
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
 \end{paracol}
+}{}
 
 \end{document}
-
-
-
-% \cvsection{A Day of My Life}
-
-% % Adapted from @Jake's answer from http://tex.stackexchange.com/a/82729/226
-% % \wheelchart{outer radius}{inner radius}{
-% % comma-separated list of value/text width/color/detail}
-% % Some ad-hoc tweaking to adjust the labels so that they don't overlap
-% \hspace*{-1em}  %% quick hack to move the wheelchart a bit left
-% \wheelchart{1.5cm}{0.5cm}{%
-%   10/13em/accent!30/Sleeping \& dreaming about work,
-%   25/9em/accent!60/Public resolving issues with Yahoo!\ investors,
-%   5/11em/accent!10/\footnotesize\\[1ex]New York \& San Francisco Ballet Jawbone board member,
-%   20/11em/accent!40/Spending time with family,
-%   5/8em/accent!20/\footnotesize Business development for Yahoo!\ after the Verizon acquisition,
-%   30/9em/accent/Showing Yahoo!\ \mbox{employees} that their work has meaning,
-%   5/8em/accent!20/Baking cupcakes
-% }
-
-% % use ONLY \newpage if you want to force a page break for
-% % ONLY the currentc column
-% \newpage
 
