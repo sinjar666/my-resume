@@ -18,10 +18,8 @@
 \documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
 
 \usepackage{xifthen}
-\include{config}
+
 \include{./include/constants}
-
-
 
 %% AltaCV uses the fontawesome5 package.
 %% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
@@ -127,6 +125,7 @@
 }
 
 \makecvheader
+
 \input{./include/headline.tex}
 
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
@@ -185,8 +184,11 @@
 
 \nocite{*}
 
-\printbibliography[heading=pubtype,title={\printinfo{\maybeicon{File}*[regular]}{Patents and Defensive Publications}}, type=patent]
-
+\printbibliography[
+  heading=pubtype,
+  title={\printinfo{\maybeicon{File*}}{Patents and Defensive Publications}},
+  type=patent
+]
 
 \cvsection{Skills}
 \input{./include/skills.tex}

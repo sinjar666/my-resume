@@ -19,6 +19,13 @@
 
 %%%%%%%%%%%%%%%%
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
+
+%%%%%%%%%%%%%%%%
+% Loads configs
+\RequirePackage{xifthen}
+\input{config}
+%%%%%%%%%%%%%%%%
+
 \ProvidesClass{altacv}[2022/11/03 AltaCV v1.6.5, yet another alternative class for a resume/curriculum vitae.]
 
 %% v1.1: Optionally load academicons
@@ -186,21 +193,48 @@
       }%
     }
 }
+
+\newcommand{\DeclareConditionalInfoField}[3]{%
+  \csdef{#1 symbol}{#2}%
+  \ifshowIcons
+    \csdef{#1}##1{%
+      \if@withhyper
+        \printinfo{\csuse{#1 symbol}}{##1}[#3##1]%
+      \else
+        \printinfo{\csuse{#1 symbol}}{##1}%
+      \fi
+    }%
+  \else
+    % Special case for 'email': do not show mailto:
+    \ifstrequal{#1}{email}{%
+      \csdef{#1}##1{%
+        \textcolor{accent}{\textbf{#1}:}~\texttt{##1}\hspace{2em}%
+      }%
+    }{%
+      \csdef{#1}##1{%
+        \textcolor{accent}{\textbf{#1}:}~\texttt{#3##1}\hspace{2em}%
+      }%
+    }%
+  \fi
+}
+
+
 \ExplSyntaxOff
+
 
 \newcommand{\name}[1]{\def\@name{#1}}
 \newcommand{\tagline}[1]{\def\@tagline{#1}}
 \newcommand{\personalinfo}[1]{\def\@personalinfo{#1}}
-\NewInfoField{email}{\maybeicon{At}}[mailto:]
-\NewInfoField{mailaddress}{\maybeicon{Envelope}}
-\NewInfoField{phone}{\maybeicon{Phone}}[tel:]
-\NewInfoField{homepage}{\maybeicon{Globe}}[https://]
-\NewInfoField{twitter}{\maybeicon{Twitter}}[https://twitter.com/]
-\NewInfoField{linkedin}{\maybeicon{Linkedin}}[https://linkedin.com/in/]
-\NewInfoField{github}{\maybeicon{Github}}[https://github.com/]
-% v1.?? Use fontawesome5 for Orcid symbol
-\NewInfoField{orcid}{\maybeicon{Orcid}}[https://orcid.org/]
-\NewInfoField{location}{\maybeicon{MapMarker}}
+\DeclareConditionalInfoField{email}{\faAt}{mailto:}{}
+\DeclareConditionalInfoField{mailaddress}{\faEnvelope}{}{}
+\DeclareConditionalInfoField{phone}{\faPhone}{}{}
+\DeclareConditionalInfoField{homepage}{\faGlobe}{https://}{}
+\DeclareConditionalInfoField{twitter}{\faTwitter}{https://twitter.com/}{}
+\DeclareConditionalInfoField{linkedin}{\faLinkedin}{https://linkedin.com/in/}{}
+\DeclareConditionalInfoField{github}{\faGithub}{https://github.com/}{}
+\DeclareConditionalInfoField{orcid}{\faOrcid}{https://orcid.org/}{}
+\DeclareConditionalInfoField{location}{\faMapMarker}{}{}
+
 
 % v1.2: Support for multiple photos
 \newlength{\altacv@photos@width}
@@ -291,12 +325,23 @@
 }
 
 \newcommand{\cvachievement}[3]{%
-  \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
-  \multirow{2}{*}{\Large\color{accent}#1} & \bfseries\textcolor{emphasis}{#2}\\
-  & #3
-  \end{tabularx}%
+  \ifthenelse{\isempty{#1} \OR \equal{#1}{}}{%
+    % No icon or icon hidden — full-width layout
+    \begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}X@{}}
+      \bfseries\textcolor{emphasis}{#2}\\
+      #3
+    \end{tabularx}%
+  }{%
+    % Icon present and not hidden
+    \begin{tabularx}{\linewidth}{@{}p{2em} @{\hspace{1ex}} >{\raggedright\arraybackslash}X@{}}
+      \multirow{2}{*}{\Large\color{accent}#1} & \bfseries\textcolor{emphasis}{#2}\\
+      & #3
+    \end{tabularx}%
+  }%
   \smallskip
 }
+
+
 
 \newcommand{\cvtag}[1]{%
   \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
