@@ -24,7 +24,6 @@
 \geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
 
 % The paracol package lets you typeset columns of text in parallel
-\usepackage{paracol}
 \usepackage{hyphenat}
 \usepackage[english]{babel}
 
@@ -119,13 +118,6 @@ Seeking a Senior Engineering Leadership role to leverage expertise in distribute
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
-%% Set the left/right column width ratio to 6:4.
-\columnratio{0.6}
-
-% Start a 2-column paracol. Both the left and right columns will automatically
-% break across pages if things get too long.
-\begin{paracol}{2}
-
 \cvsection{Experience}
 
 \cvevent{Director, Software Development}{VISA Cloud Platform IaaS}{September 2023 -- Present}{Bengaluru, IN}
@@ -192,11 +184,7 @@ Seeking a Senior Engineering Leadership role to leverage expertise in distribute
 \cvevent{Summer Intern}{SRM Research Institute}{May 2012 -- June 2012}{Bengaluru, IN}
 Developed "CLASSICO", a desktop application enabling one-to-one audio/video communication between rural and urban schools. Led the entire product development under tight deadlines and budget constraints.
 
-\textbf{Technology Stack:} Python (Ubuntu/Debian), GStreamer, GTK+
-
-%% Switch to the right column. This will now automatically move to the second
-%% page if the content is too long.
-\switchcolumn
+\textbf{Technology Stack:} Python (Ubuntu/Debian), GStreamer, GTK+s
 
 \cvsection{Publications}
 
@@ -287,8 +275,6 @@ Developed "CLASSICO", a desktop application enabling one-to-one audio/video comm
 \divider
 
 \cvevent{High School}{Loyola High School}{Class of 2009}{Jamshedpur IN}
-
-\end{paracol}
 
 \end{document}
 
