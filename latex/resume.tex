@@ -17,14 +17,21 @@
 
 \documentclass[10pt,a4paper,ragged2e,withhyper]{altacv}
 
+\usepackage{xifthen}
+
+\include{./include/constants}
+
 %% AltaCV uses the fontawesome5 package.
 %% See http://texdoc.net/pkg/fontawesome5 for full list of symbols.
 
 % Change the page layout if you need to
 \geometry{left=1.25cm,right=1.25cm,top=1.5cm,bottom=1.5cm,columnsep=1.2cm}
 
-% The paracol package lets you typeset columns of text in parallel
-\usepackage{paracol}
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
+  % The paracol package lets you typeset columns of text in parallel
+  \usepackage{paracol}
+}{}
+
 \usepackage{hyphenat}
 \usepackage[english]{babel}
 
@@ -60,7 +67,51 @@
 % Change the bullets for itemize and rating marker
 % for \cvskill if you want to
 \renewcommand{\itemmarker}{{\small\textbullet}}
-\renewcommand{\ratingmarker}{\faCircle}
+\renewcommand{\ratingmarker}{\maybeicon{Circle}}
+
+% Final rendering command: icon (if enabled), title, description
+\newcommand{\achievementEntry}[3]{%
+  \cvachievement{\maybeicon{#1}}{\textbf{#2}}{#3}%
+  \divider
+}
+
+% Override cvevent
+\renewcommand{\cvevent}[4]{%
+  \ifthenelse{\boolean{TWO_COLUMN_LAYOUT}}{%
+    % -------------------------
+    % Multi-line layout (original)
+    % -------------------------
+    {\large\color{emphasis}#1\par}
+    \smallskip\normalsize
+    \ifstrequal{#2}{}{}{%
+      \textbf{\color{accent}#2}\par
+      \smallskip
+    }%
+    \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{Calendar}~#3}}}%
+    \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{MapMarker}~#4}}}%
+    \par
+  }{%
+    % -------------------------
+    % Single-line compact layout
+    % -------------------------
+    {\normalsize
+      \color{emphasis}#1%
+      \ifstrequal{#2}{}{ }{~~~·~~~\textbf{\color{accent}#2}}%
+      \ifstrequal{#3#4}{}{}{~~~·~~~}%
+      \ifstrequal{#3}{}{}{%
+        \maybeicon{Calendar}~#3%
+        \ifstrequal{#4}{}{ }{~~~·~~~}%
+      }%
+      \ifstrequal{#4}{}{}{%
+        \maybeicon{MapMarker}~#4%
+      }%
+      \par
+    }%
+  }%
+  \medskip\normalsize
+}
+
+
 
 %% Use (and optionally edit if necessary) this .tex if you
 %% want to use an author-year reference style like APA(6)
@@ -76,36 +127,40 @@
 \addbibresource{sample.bib}
 
 \begin{document}
-\name{Srijan Mukherjee}
-\tagline{Hands-on Engineering Leader \& Problem Solver}
+\name{\resdataName}
+\tagline{\resdataTagline}
 %% You can add multiple photos on the left or right
-\photoR{2.5cm}{resume-img}
+
+\ifshowIcons
+  \photoR{2.5cm}{resume-img}
+\fi
+
 % \photoL{2cm}{Yacht_High,Suitcase_High}
 \personalinfo{%
   % Not all of these are required!
   % You can add your own with \printinfo{symbol}{detail}
-  \email{srijmukh070@gmail.com}
-  \phone{+91-8660685187}
+  \email{\resdataEmail}
+  \phone{\resdataPhone}
   %\mailaddress{Address, Street, 00000 County}
-  \location{Bengaluru, KA}
-  \github{sinjar666}
-  \linkedin{sinjar666}
+  \location{\resdataLocation}
+  \github{\resdataGithubHandle}
+  \linkedin{\resdataLinkedinHandle}
 
   %% You can add your own arbitrary detail with
   %% \printinfo{symbol}{detail}[optional hyperlink prefix]
-  % \printinfo{\faPaw}{Hey ho!}
+  % \printinfo{\maybeicon{Paw}}{Hey ho!}
   %% Or you can declare your own field with
   %% \NewInfoFiled{fieldname}{symbol}[optional hyperlink prefix] and use it:
-  % \NewInfoField{gitlab}{\faGitlab}[https://gitlab.com/]
+  % \NewInfoField{gitlab}{\maybeicon{Gitlab}}[https://gitlab.com/]
   % \gitlab{your_id}
 	%%
   %% For services and platforms like Mastodon where there isn't a
   %% straightforward relation between the user ID/nickname and the hyperlink,
   %% you can use \printinfo directly e.g.
-  % \printinfo{\faMastodon}{@username@instace}[https://instance.url/@username]
+  % \printinfo{\maybeicon{Mastodon}}{@username@instace}[https://instance.url/@username]
   %% But if you absolutely want to create new dedicated info fields for
   %% such platforms, then use \NewInfoField* with a star:
-  % \NewInfoField*{mastodon}{\faMastodon}
+  % \NewInfoField*{mastodon}{\maybeicon{Mastodon}}
   %% then you can use \mastodon, with TWO arguments where the 2nd argument is
   %% the full hyperlink.
   % \mastodon{@username@instance}{https://instance.url/@username}
@@ -113,168 +168,77 @@
 
 \makecvheader
 
-Dynamic and results-oriented engineering leader with over \textbf{12 years} of experience in software development and team management. Proven track record in driving product innovation, optimizing engineering processes, and enhancing team performance. 
-Seeking a Senior Engineering Leadership role to leverage expertise in distributed computing, agile methodologies, and cross-functional collaboration to deliver impactful solutions and foster a culture of excellence within the team
+\input{./include/headline.tex}
 
 %% Depending on your tastes, you may want to make fonts of itemize environments slightly smaller
 \AtBeginEnvironment{itemize}{\small}
 
-%% Set the left/right column width ratio to 6:4.
-\columnratio{0.6}
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
+  %% Set the left/right column width ratio to 6:4.
+  \columnratio{0.6}
 
-% Start a 2-column paracol. Both the left and right columns will automatically
-% break across pages if things get too long.
-\begin{paracol}{2}
+  % Start a 2-column paracol. Both the left and right columns will automatically
+  % break across pages if things get too long.
+  \begin{paracol}{2}
+
+  % Manually apply the body color to both columns
+  \color{body}  % Apply the color at the beginning of left column
+}{}
 
 \cvsection{Experience}
 
 \cvevent{Director, Software Development}{VISA Cloud Platform IaaS}{September 2023 -- Present}{Bengaluru, IN}
-\begin{itemize}
-  \item Spearheaded the delivery of intricate engineering projects, including a \textbf{Zero Downtime MongoDB to MySQL migration at 2000+ QPS} and the development of a highly available event messaging framework.
-  \item Directed the re-architecture of the in-house Distributed Execution Engine, transforming it from an Active-Passive to an \textbf{Active-Active multi-writer} configuration using traditional MySQL, resulting in a \textbf{50\% reduction in infrastructure costs}.
-  \item Initiated the development of "vPlay," a cloud-based in-browser IDE aimed at reimagining the developer experience and mitigating left-shift inertia, with projected annual savings exceeding \textbf{\$1M}.
-  \item Established and led a high-performing Bangalore Cloud Platform team of \textbf{18 members} (2 Managers + 16 Engineers), fostering collaboration and innovation.
-  \item Oversaw a robust portfolio consisting of \textbf{18 microservices and frontends} and 5 SDKs, achieving year-over-year cost savings of approximately \textbf{\(\sim\)\$200M}.
-  \item Strategically positioned VISA's Enterprise Cloud to evolve into a \textbf{SaaS offering} as part of a comprehensive 5-year growth plan.
-  \item Championed the elevation of \textbf{Generative AI} capabilities and awareness, resulting in a \textbf{10\% increase in developer productivity} across the VISA Bengaluru Technology Center in Q1-Q2 FY-24.
-  \item Led multiple site-level initiatives and actively mentored 3 employees across various teams and functions, enhancing the leadership quotient and overall technological competence of the Bengaluru Technology Center.
-\end{itemize}
+\input{./include/exp-director-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Senior Engineering Manager}{VISA Cloud Platform IaaS}{August 2021 -- August 2023}{Bengaluru, IN}
-\begin{itemize}
-  \item Launched \textbf{2 new products} in FY22-23 by repurposing \textbf{existing resources}, achieving delivery in early FY-24.
-  \item Developed a team of \(\sim\)11 full-stack engineers driving design and development for \textbf{10+ services} automating day-2 lifecycle aspects of cloud infrastructure.
-  \item Increased adoption of VISA's Enterprise Server Configuration Management Solution by \textbf{400\%} from FY-21 to FY-23.
-  \item Reduced \textbf{hotfix frequency by 45\%} for critical products, achieving success rates >\textbf{98\%} and SLA adherence >\textbf{95\%}.
-  \item Contributed \textbf{10-15\% of code reviews} for oversight and burst capacity.
-  \item Managed project schedules and cost estimations for the portfolio.
-  \item Co-authored \textbf{Intellectual Property} with the team.
-\end{itemize}
+\input{./include/exp-sr-manager-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Staff Full Stack Developer}{VISA Cloud Platform}{Jan 2019 -- July 2021}{Bengaluru, IN}
-\begin{itemize}
-  \item Key owner of the Core UI Platform for CloudView, the portal for VISA’s infrastructure provisioning and lifecycle management.
-  \item Led VISA’s \textbf{hybrid cloud} initiative, focusing on \textbf{ESB and Enterprise Gateway Automation} and provisioning services.
-  \item Introduced \textbf{HTTP/2 'SPDY'} streams and \textbf{Server-Sent Events} as alternatives to REST, driving server-side implementation.
-  \item Mentored junior team members in enterprise coding practices and software architecture.
-\end{itemize}
+\input{./include/exp-staff-eng-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{Senior Full Stack Developer}{VISA Inc}{Feb 2017 -- Jan 2019}{Bengaluru, IN}
-\begin{itemize}
-  \item Developed essential features for \textbf{self-service} capabilities in cloud provisioning, focusing on \textbf{Kubernetes Container Orchestration}.
-  \item Led UI development across components, ensuring a cohesive user experience.
-  \item Enforced enterprise design patterns in UI development, including \textbf{Redux} and \textbf{RxJS}, promoting testable components.
-  \item Designed an enterprise rapid application framework using Node.js, Express, and TypeScript, accelerating API development.
-  \item Created an in-house \textbf{SPA agnostic micro-frontend framework} for internal app contributions.
-  \item Established scalable \textbf{build and deploy strategies} for Node.js applications.
-\end{itemize}
+\input{./include/exp-sr-eng-visa.tex}
 
-\divider
+\divider  
 
 \cvevent{From Project Trainee to Senior Engineer}{Honeywell Technology Solutions}{Dec 2012 -- Jan 2017}{Bengaluru, IN}
-\begin{itemize}
-  \item Developed software tools for productivity and process adherence in \textbf{Flight Management Systems} (FMS) Software.
-  \item Created a web-based port of a legacy model-based UI with ARINC-661 widgets using AngularJS, Bootstrap, and Ionic.
-  \item Engineered asynchronous network services for the Build Server with C\# .NET.
-  \item Developed a proprietary \textbf{desktop application} for software requirements management using C\# .NET and WPF.
-  \item Contributed to the UI and Display Proxy layers of \textbf{NG-FMS} deployed on major aircraft by \textbf{Boeing, Airbus, Dassault, and Gulfstream}.
-\end{itemize}
+\input{./include/exp-honeywell.tex}
 
-
-\divider
+\divider  
 
 \cvevent{Summer Intern}{SRM Research Institute}{May 2012 -- June 2012}{Bengaluru, IN}
-Developed "CLASSICO", a desktop application enabling one-to-one audio/video communication between rural and urban schools. Led the entire product development under tight deadlines and budget constraints.
+\input{./include/exp-intern-srm.tex}
 
-\textbf{Technology Stack:} Python (Ubuntu/Debian), GStreamer, GTK+
-
-%% Switch to the right column. This will now automatically move to the second
-%% page if the content is too long.
-\switchcolumn
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
+  %% Switch to the right column. This will now automatically move to the second
+  %% page if the content is too long.
+  \switchcolumn
+  \color{body}  % Apply the color at the beginning of left column
+}{}
 
 \cvsection{Publications}
 
 \nocite{*}
 
-\printbibliography[heading=pubtype,title={\printinfo{\faFile*[regular]}{Patents and Defensive Publications}}, type=patent]
-
+\printbibliography[
+  heading=pubtype,
+  title={\printinfo{\maybeicon{File*}}{Patents and Defensive Publications}},
+  type=patent
+]
 
 \cvsection{Skills}
+\input{./include/skills.tex}
 
-\cvtag{Private Cloud}
-\cvtag{PaaS}
-\cvtag{IaaS}
-\cvtag{SaaS}
-
-\divider\smallskip
-
-\cvtag{Engineering Leadership}
-\cvtag{Team Collaboration}
-\cvtag{People Management}
-\cvtag{Project Management}
-\cvtag{Mentorship}
-\cvtag{Adaptability}
-\cvtag{Strategic Thinking}
-\cvtag{Conflict Resolution}
-
-\divider\smallskip
-
-\cvtag{Distributed Computing}
-\cvtag{NodeJS}
-\cvtag{Java}
-\cvtag{Spring}
-\cvtag{Angular}
-\cvtag{Linux}
-\cvtag{Kafka}
-
-\cvtag{Multithreading}
-\cvtag{HTML/CSS}
-\cvtag{C++}
-\cvtag{C\# .NET}
-\cvtag{HTTP/REST}
-\cvtag{Virtualization}
-\cvtag{MySQL}
-\cvtag{MongoDB}
-\cvtag{ElasticSearch}
-\cvtag{Hazelcast}
-\cvtag{GoLang}
-\cvtag{Qt}
-\cvtag{Erlang}
-\cvtag{Software Design and Architecture}
-
-\divider\smallskip
-
-\cvtag{Git}
-\cvtag{JIRA}
-\cvtag{Splunk}
-\cvtag{MS-Office}
-\cvtag{K8s}
-
-\divider
-
+% Render Section
 \cvsection{Most Proud Of}
-
-\cvachievement{\faChartLine}{\textbf{Revolutionized Product Maturity}}{Elevated automation runs from hundreds annually to an astounding \textbf{over 10 million} in FY-23-24, showcasing a transformative leap in efficiency.}
-
-\divider
-
-\cvachievement{\faCheck}{\textbf{Unmatched Manager Effectiveness}}{Achieved a \textbf{100\% manager effectiveness score} in the FY-23-24 anonymous employee survey, reflecting exceptional leadership and team cohesion.}
-
-\divider
-
-\cvachievement{\faTrophy}{\textbf{Portfolio Expansion}}{Doubled the India team's portfolio by \textbf{2x in just 2 years} while maintaining the same number of engineers, demonstrating strategic resource management and innovation.}
-
-\divider
-
-\cvachievement{\faLightbulb}{\textbf{Embracing a Growth Mindset}}{Cultivated a proactive approach to change and continuous learning, enabling seamless transitions across diverse roles, technologies, and domains throughout my career.}
-
-\divider
+\input{./include/achievements}
+\loadAchievements
 
 \cvsection{Education}
 
@@ -288,30 +252,9 @@ Developed "CLASSICO", a desktop application enabling one-to-one audio/video comm
 
 \cvevent{High School}{Loyola High School}{Class of 2009}{Jamshedpur IN}
 
+\ifthenelse{\boolean{TWO_COLUMN_LAYOUT}} {
 \end{paracol}
+}{}
 
 \end{document}
-
-
-
-% \cvsection{A Day of My Life}
-
-% % Adapted from @Jake's answer from http://tex.stackexchange.com/a/82729/226
-% % \wheelchart{outer radius}{inner radius}{
-% % comma-separated list of value/text width/color/detail}
-% % Some ad-hoc tweaking to adjust the labels so that they don't overlap
-% \hspace*{-1em}  %% quick hack to move the wheelchart a bit left
-% \wheelchart{1.5cm}{0.5cm}{%
-%   10/13em/accent!30/Sleeping \& dreaming about work,
-%   25/9em/accent!60/Public resolving issues with Yahoo!\ investors,
-%   5/11em/accent!10/\footnotesize\\[1ex]New York \& San Francisco Ballet Jawbone board member,
-%   20/11em/accent!40/Spending time with family,
-%   5/8em/accent!20/\footnotesize Business development for Yahoo!\ after the Verizon acquisition,
-%   30/9em/accent/Showing Yahoo!\ \mbox{employees} that their work has meaning,
-%   5/8em/accent!20/Baking cupcakes
-% }
-
-% % use ONLY \newpage if you want to force a page break for
-% % ONLY the currentc column
-% \newpage
 
