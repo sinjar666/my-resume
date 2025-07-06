@@ -1,12 +1,10 @@
 \newboolean{TWO_COLUMN_LAYOUT}
-\newboolean{ENABLE_GRAPHICS}
 
-\setboolean{TWO_COLUMN_LAYOUT}{true}
-\setboolean{ENABLE_GRAPHICS}{true}
+\setboolean{TWO_COLUMN_LAYOUT}{false}
 
 \newif\ifshowIcons
-%\showIconstrue    % or \showIconsfalse to hide icons
-\showIconsfalse
+\showIconstrue    % or \showIconsfalse to hide icons
+%\showIconsfalse
 
 % Converts string like "ChartLine" to \faChartLine
 \newcommand{\faicon}[1]{\csname fa#1\endcsname}

@@ -75,6 +75,44 @@
   \divider
 }
 
+% Override cvevent
+\renewcommand{\cvevent}[4]{%
+  \ifthenelse{\boolean{TWO_COLUMN_LAYOUT}}{%
+    % -------------------------
+    % Multi-line layout (original)
+    % -------------------------
+    {\large\color{emphasis}#1\par}
+    \smallskip\normalsize
+    \ifstrequal{#2}{}{}{%
+      \textbf{\color{accent}#2}\par
+      \smallskip
+    }%
+    \ifstrequal{#3}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{Calendar}~#3}}}%
+    \ifstrequal{#4}{}{}{{\small\makebox[0.5\linewidth][l]{\maybeicon{MapMarker}~#4}}}%
+    \par
+  }{%
+    % -------------------------
+    % Single-line compact layout
+    % -------------------------
+    {\normalsize
+      \color{emphasis}#1%
+      \ifstrequal{#2}{}{ }{~~~·~~~\textbf{\color{accent}#2}}%
+      \ifstrequal{#3#4}{}{}{~~~·~~~}%
+      \ifstrequal{#3}{}{}{%
+        \maybeicon{Calendar}~#3%
+        \ifstrequal{#4}{}{ }{~~~·~~~}%
+      }%
+      \ifstrequal{#4}{}{}{%
+        \maybeicon{MapMarker}~#4%
+      }%
+      \par
+    }%
+  }%
+  \medskip\normalsize
+}
+
+
+
 %% Use (and optionally edit if necessary) this .tex if you
 %% want to use an author-year reference style like APA(6)
 %% for your publication list
@@ -92,7 +130,11 @@
 \name{\resdataName}
 \tagline{\resdataTagline}
 %% You can add multiple photos on the left or right
-\photoR{2.5cm}{resume-img}
+
+\ifshowIcons
+  \photoR{2.5cm}{resume-img}
+\fi
+
 % \photoL{2cm}{Yacht_High,Suitcase_High}
 \personalinfo{%
   % Not all of these are required!

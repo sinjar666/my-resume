@@ -53,6 +53,7 @@
 \RequirePackage{ifxetex,ifluatex}
 \RequirePackage{scrlfile}
 \RequirePackage{xparse}
+\RequirePackage{xstring}
 
 %% v1.1.5: added for convenience
 \newif\ifxetexorluatex
@@ -341,11 +342,35 @@
   \smallskip
 }
 
-
-
 \newcommand{\cvtag}[1]{%
-  \tikz[baseline]\node[anchor=base,draw=body!30,rounded corners,inner xsep=1ex,inner ysep =0.75ex,text height=1.5ex,text depth=.25ex]{#1};
+  \ifshowIcons
+    % Remove spaces around commas and loop over tags
+    \StrSubstitute{#1}{, }{,}[\tempA]%
+    \StrSubstitute{\tempA}{ ,}{,}[\tempB]%
+    \foreach \tag in \tempB {%
+      \tikz[baseline]
+        \node[
+          anchor=base,
+          draw=body!30,
+          rounded corners,
+          inner xsep=1ex,
+          inner ysep=0.75ex,
+          text height=1.5ex,
+          text depth=.25ex
+        ]{\tag};%
+      \hspace{0.5ex}%
+    }%
+  \else
+    % Remove spaces around commas and add consistent spacing
+    \StrSubstitute{#1}{, }{,}[\tempC]%
+    \StrSubstitute{\tempC}{ ,}{,}[\tempD]%
+    \StrSubstitute{\tempD}{,}{, }[\tagtext]%
+    \tagtext%
+  \fi
 }
+
+
+
 
 % v1.6: Use accsupp so that the actual numeric value is copied/pasted
 %       and also support 0.5, 1.5, 2.5, 3.5, 4.5
