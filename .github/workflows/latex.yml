@@ -9,5 +9,6 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: latex/resume.tex
-          compiler: lualatex
+          working_directory: latex
+          root_file: resume.tex
+          compiler: pdflatex
