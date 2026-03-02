@@ -9,6 +9,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
+          os: debian
           working_directory: latex
           root_file: resume.tex
           compiler: pdflatex
