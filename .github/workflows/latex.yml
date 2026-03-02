@@ -9,7 +9,8 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v4
         with:
-          os: debian
+          os: alpine
+          docker_image: ghcr.io/xu-cheng/texlive-alpine:20251002
           working_directory: latex
           root_file: resume.tex
           compiler: pdflatex
