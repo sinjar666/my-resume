@@ -365,7 +365,7 @@
     \StrSubstitute{#1}{, }{,}[\tempC]%
     \StrSubstitute{\tempC}{ ,}{,}[\tempD]%
     \StrSubstitute{\tempD}{,}{, }[\tagtext]%
-    \tagtext%
+    \tagtext ,%
   \fi
 }
 
