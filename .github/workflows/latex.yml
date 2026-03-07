@@ -15,7 +15,7 @@ jobs:
           # Generate timestamp (e.g., 20231027-143005)
           TAG_NAME="v$(date +'%Y%m%d-%H%M%S')"
           echo "Creating tag: $TAG_NAME"
-          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
+          echo "new_tag=$TAG_NAME" >> $GITHUB_OUTPUT
           
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
