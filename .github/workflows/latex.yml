@@ -39,5 +39,6 @@ jobs:
           # Optional: ensure notes match the custom tag
           name: Release ${{ steps.generate_tag.outputs.new_tag }}
           generate_release_notes: true
+          files: latex/resume.pdf
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
