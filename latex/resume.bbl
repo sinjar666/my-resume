@@ -1,5 +1,5 @@
 % $ biblatex auxiliary file $
-% $ biblatex bbl format version 3.2 $
+% $ biblatex bbl format version 3.3 $
 % Do not modify the above lines!
 %
 % This is an auxiliary file used by the 'biblatex' package.
@@ -18,8 +18,8 @@
 
 
 \refsection{0}
-  \datalist[entry]{ydnt/global//global/global}
-    \entry{Mukherjee:Srijan:2022}{article}{}
+  \datalist[entry]{ydnt/global//global/global/global}
+    \entry{Mukherjee:Srijan:2022}{article}{}{}
       \name{author}{4}{}{%
         {{hash=78a5e64d433af908c6c9368c7d57aee0}{%
            family={Mukherjee},
@@ -44,10 +44,12 @@
       }
       \strng{namehash}{95f7309d4971c503c0fb206e7b6041cd}
       \strng{fullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{fullhashraw}{9f162bbe606444fb12fccde68698819f}
       \strng{bibnamehash}{9f162bbe606444fb12fccde68698819f}
       \strng{authorbibnamehash}{9f162bbe606444fb12fccde68698819f}
       \strng{authornamehash}{95f7309d4971c503c0fb206e7b6041cd}
       \strng{authorfullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authorfullhashraw}{9f162bbe606444fb12fccde68698819f}
       \field{extraname}{1}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
@@ -59,7 +61,7 @@
       \field{year}{2022}
       \true{nocite}
     \endentry
-    \entry{Mukherjee}{patent}{}
+    \entry{Mukherjee}{patent}{}{}
       \name{author}{4}{}{%
         {{hash=78a5e64d433af908c6c9368c7d57aee0}{%
            family={Mukherjee},
@@ -91,13 +93,16 @@
       }
       \strng{namehash}{95f7309d4971c503c0fb206e7b6041cd}
       \strng{fullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{fullhashraw}{9f162bbe606444fb12fccde68698819f}
       \strng{bibnamehash}{9f162bbe606444fb12fccde68698819f}
       \strng{authorbibnamehash}{9f162bbe606444fb12fccde68698819f}
       \strng{authornamehash}{95f7309d4971c503c0fb206e7b6041cd}
       \strng{authorfullhash}{9f162bbe606444fb12fccde68698819f}
+      \strng{authorfullhashraw}{9f162bbe606444fb12fccde68698819f}
       \strng{holderbibnamehash}{fe42b1e177bce632e00d4ce3fd6bdb09}
       \strng{holdernamehash}{fe42b1e177bce632e00d4ce3fd6bdb09}
       \strng{holderfullhash}{fe42b1e177bce632e00d4ce3fd6bdb09}
+      \strng{holderfullhashraw}{fe42b1e177bce632e00d4ce3fd6bdb09}
       \field{extraname}{2}
       \field{sortinit}{2}
       \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
