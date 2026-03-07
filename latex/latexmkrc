@@ -1,0 +1,2 @@
+$pdf_mode = 1; # Use pdflatex
+$bibtex_use = 'biber'; # Use biber, not bibtex
