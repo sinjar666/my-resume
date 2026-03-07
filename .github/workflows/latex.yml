@@ -10,10 +10,12 @@ jobs:
       - name: Set up Git repository
         uses: actions/checkout@v2
       - name: Create and Push Tag
+        id: generate_tag
         run: |
           # Generate timestamp (e.g., 20231027-143005)
           TAG_NAME="v$(date +'%Y%m%d-%H%M%S')"
           echo "Creating tag: $TAG_NAME"
+          echo "tag=$TAG_NAME" >> $GITHUB_OUTPUT
           
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -30,7 +32,12 @@ jobs:
         with:
           name: PDF
           path: latex/resume.pdf
-      - name: Release
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: latex/resume.pdf
+          tag_name: ${{ steps.generate_tag.outputs.new_tag }}
+          # Optional: ensure notes match the custom tag
+          name: Release ${{ steps.generate_tag.outputs.new_tag }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
