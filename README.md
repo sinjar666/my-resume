@@ -66,7 +66,7 @@ texlive-ragged2e texlive-enumitem texlive-tcolorbox texlive-academicons
 
 ```bash
 cd latex
-docker run --user "$(id -u):$(id -g)" -v "$(pwd):/data" texlive/texlive pdflatex resume.tex
+docker run -it -v $(pwd):/workdir texlive/texlive pdflatex ./resume.tex
 ```
 
 ### Step 2: Compile Your Resume
