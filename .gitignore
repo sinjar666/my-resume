@@ -2,3 +2,5 @@ latex/*.pdf
 *.aux
 *.log
 *.xmpi
+latex/*.run.xml
+latex/*.bcf

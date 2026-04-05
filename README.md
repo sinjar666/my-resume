@@ -62,6 +62,13 @@ texlive-titlesec texlive-fontawesome5 texlive-xifthen texlive-pgf texlive-paraco
 texlive-ragged2e texlive-enumitem texlive-tcolorbox texlive-academicons
 ```
 
+#### Docker
+
+```bash
+cd latex
+docker run --user "$(id -u):$(id -g)" -v "$(pwd):/data" texlive/texlive pdflatex resume.tex
+```
+
 ### Step 2: Compile Your Resume
 
 1. **Navigate to your LaTeX directory** where your `resume.tex` file is located:
