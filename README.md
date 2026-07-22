@@ -2,6 +2,8 @@
 
 This README provides instructions to set up LaTeX with the `altacv` class and the necessary packages to compile a resume on Windows, macOS, and Linux (Fedora and Ubuntu).
 
+[![Build LaTeX document](https://github.com/sinjar666/my-resume/actions/workflows/latex.yml/badge.svg)](https://github.com/sinjar666/my-resume/actions/workflows/latex.yml)
+
 ## Prerequisites
 
 Ensure you have the following installed on your system:
